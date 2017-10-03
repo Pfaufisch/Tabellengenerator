@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tabellengenerator</title>
+</head>
+
+<body>
+
+<div>
+<h1>Eingabe</h1>
+
+<textarea cols="60" rows="10" id="input"></textarea>
+
+<br>
+Spalte hinzufügen:
+<button id="mobile">Mobil und Desktop</button>
+<button id="desktop">Nur Desktop</button>
+<br>
+Bewertung:
+<button id="gut">gut ↑</button>
+<button id="mittel">mittel →</button>
+<button id="schlecht">schlecht ↓</button>
+
+
+
+
+<ol>
+ <li>Titel vergeben</li>
+ <li>Spalten hinzufuegen (mit Buttons?)</li>
+ <li>Inhalt hinzufuegen</li>
+ <li>Bewertungen hinzufuegen (Buttons!)</li>
+ <li>Buttons hinzufuegen (Button-Buttons!)</li>
+ <li>?</li>
+ <li>Tabelle wird unten generiert</li>
+</ol>
+
+</div>
+
+<div>
+<h1>Ausgabe</h1>
+<p>Vollstaendig kopieren und in InterRed einfuegen</p>
+<textarea cols="60" rows="10" id="output" readonly></textarea>
+</div>
+
+<script>
+// Wiederverwendete Schnipsel
+const gut = '<chip-thumbs>gut</chip-thumbs>';
+const mittel = '<chip-thumbs>befriedigend</chip-thumbs>';
+const schlecht = '<chip-thumbs>mangelhaft</chip-thumbs>';
+
+// Bewertungs-Buttons Text einfügen lassen
+document.getElementById('gut').onclick = tagGut;
+
+function tagGut() {
+  console.log('Hallo Welt');
+}
+
+
+
+// Spalten einfügen
+
+document.getElementById('desktop').onclick = insertColDesktop;
+
+// Quelle: https://stackoverflow.com/questions/11076975/insert-text-into-textarea-at-cursor-position-javascript
+function insertColDesktop() {
+    let myField = document.getElementById('input');
+    let myValue = '<chip-mobile>no</chip-mobile>';
+
+    //IE support
+    if (document.selection) {
+        myField.focus();
+        sel = document.selection.createRange();
+        sel.text = myValue;
+    }
+    //MOZILLA and others
+    else if (myField.selectionStart || myField.selectionStart == '0') {
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        myField.value = myField.value.substring(0, startPos)
+            + myValue
+            + myField.value.substring(endPos, myField.value.length);
+        myField.selectionStart = startPos + myValue.length;
+        myField.selectionEnd = startPos + myValue.length;
+    } else {
+        myField.value += myValue;
+    }
+}
+
+
+
+
+// Ausgabe
+
+document.getElementById('input').addEventListener('keyup', generateOutput);
+
+function generateOutput() {
+  // Gesamter Inhalt von input
+  let originalInput = document.getElementById('input').value;
+
+  // Titel-Zeile auslesen
+  let originalTitle = originalInput.split('\n')[0];
+
+  // Zweite Zeile auslesen
+  let originalCols = originalInput.split('\n')[1];
+
+  // Ausgabe
+  document.getElementById('output').innerHTML = `<chip-widgets type="table">\n<chip-header>${originalTitle}</chip-header>\n<chip-content>\n${originalCols}\n</chip-content>\n</chichip-widgets>`;
+}
+
+
+
+// Ab hier beginnt die Ausgabe
+// <chip-widgets type="table">
+// <chip-header>$title</chip-header>
+// <chip-content>
+// ||Überschrift 1|Überschrift 2|Überschrift 3|| ($cols)
+// |Text1|Text2|Text3
+// </chip-content>
+// </chip-widgets>
+
+
+
+
+/*
+// Alle Eingaben wieder ausgeben
+
+
+let originalInput = document.getElementById('input').value;
+
+document.getElementById('input').onkeyup = testPrint;
+
+function testPrint() {
+  let input = document.getElementById('input');
+  console.log(input.value);
+  document.getElementById('output').innerHTML = input.value;
+}
+
+// Erste Zeile der Textarea als Titel markieren
+let originalTitle = originalInput.split('\n')[0];
+
+// Titel der Tabelle ins Markup packen
+// let title = '<chip-header>' + originalTitle + '</chip-header>';
+
+
+
+// Gesamtausgabe von allem.
+document.getElementById('input').onkeyup = printOutput;
+
+function printOutput() {
+  document.getElementById('output').innerHTML = `<chip-widgets type="table"> \n <chip-header> ${originalTitle} </chip-header> \n <chip-content>`;
+}
+
+
+
+Das ist der Ansatz für eine separate Titel-Zeile, der aber hoffentlich nicht benötigt wird!
+
+document.getElementById('title').onkeyup = titleConverter;
+
+function titleConverter() {
+  let originalTitle = document.getElementById('title').value;
+  document.getElementById('output').innerHTML = '<chip-header>' + originalTitle + '</chip-header>';
+}
+*/
+
+
+
+
+
+
+
+</script>
+</body>
+
+</html>
