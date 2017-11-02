@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Widgetgenerator</title>
+<style type="text/css">
+body {
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+td {
+    padding: 4px;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>CHIP-Widget-Generator</h1>
+<ul>
+ <li><a href="Tabellendesigner.html">Tabelle</a></li>
+ <li>Prospekte</li>
+ <li>Civey</li>
+</ul>
+
+<h2 id="prospekte">Prospekte</h2>
+
+ <label>Business Unit</label>
+  <select id="selectBusinessUnit">
+   <option value="nht">NHT</option>
+   <option value="bad">BAD</option>
+  </select>
+
+ <br>
+ <label>Händler</label>
+  <select id="selectMerchant">
+   <optgroup label="Top-Händler">
+   <option value="14">Media Markt</option>
+   <option value="23">Rewe</option>
+   <option value="28">Lidl</option>
+   <option value="29">Aldi Süd</option>
+   <option value="30">Aldi Nord</option>
+   </optgroup>
+
+   <optgroup label="Alle Händler">
+   <option value="15">real</option>
+   <option value="20">Galeria Kaufhof</option>
+   <option value="58">Hit</option>
+   <option value="61">Ikea</option>
+   <option value="103">Netto</option>
+   <option value="74">Obi</option>
+   <option value="98">Karstadt</option>
+   <option value="102">Müller</option>
+   <option value="106">Norma</option>
+   <option value="29034">Gravis</option>
+   <option value="67394">Kaufland</option>
+   <option value="67998">Cyberport</option>
+   <option value="69470">Edeka</option>
+   <option value="28989">McDonald's</option>
+
+   </optgroup>
+  </select>
+
+  <br>
+  <button id="offeristaButton">Widget erzeugen</button>
+
+
+
+<h2 id="civey">Civey</h2>
+
+<label>Civey-ID:</label> <input type="text" id="civeyId">
+<button id="civeyButton">Widget erzeugen</button>
+
+
+<br><br><br>
+<label>Widget-Code</label><br>
+<textarea id="output" rows="12" cols="80"></textarea>
+
+
+<script>
+
+// Prospekte
+
+
+
+
+
+
+document.getElementById("offeristaButton").addEventListener("click", generateOfferistaWidget);
+
+function generateOfferistaWidget() {
+ let businessUnit = document.getElementById("selectBusinessUnit").value;
+ let merchantId = document.getElementById("selectMerchant").value;
+ let merchantName = document.getElementById('selectMerchant').options[document.getElementById('selectMerchant').selectedIndex].text;
+ document.getElementById("output").innerHTML = `<chip-widgets
+   type="marktjagd"
+   client="chip_${businessUnit}_widget"
+   company_id="${merchantId}"
+ >
+ <a href="https://prospekte.chip.de/company/${merchantId}?chip_${businessUnit}_pr_bfp" rel="nofollow">Aktuellen ${merchantName}-Prospekt aufrufen</a>
+ </chip-widgets>`;
+
+
+
+ console.log(`Offerista-Widget mit der ID ${merchantId} und dem Namen ${merchantName} für ${businessUnit} erzeugt.`);
+};
+
+document.getElementById("civeyButton").addEventListener("click", generateCiveyWidget);
+function generateCiveyWidget() {
+ let civeyId = document.getElementById("civeyId").value;
+ document.getElementById("output").innerHTML = `\<chip-widgets
+  type="custom"
+  name="civey"
+>
+\<a href="https://app.civey.com/shares/${civeyId}?utm_source=chip.de" target="_blank">App-Nutzer: Klicken Sie bitte hier, um zur Umfrage zu gelangen</a>
+\<script type="text/chip-widgets-html">
+  \<iframe src="https://widget.civey.com/${civeyId}" frameborder="0" width="100%" height="520"></iframe>
+\<\/script>
+\<\/chip-widgets\>`;
+console.log(`Civey-Widget mit der ID ${civeyId} erzeugt.`);
+
+};
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+  "widget": "Offerista",
+  "Händler": [
+    {
+      "name": "Aldi Nord",
+      "id": 30
+    },
+    {
+      "name": "Aldi Süd",
+      "id": 29
+    },
+    {
+      "name": "Burger King",
+      "id": 72140
+    }
+  ]
+}
