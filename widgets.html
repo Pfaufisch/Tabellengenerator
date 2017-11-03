@@ -20,9 +20,10 @@ td {
 
 <h1>CHIP-Widget-Generator</h1>
 <ul>
- <li><a href="Tabellendesigner.html">Tabelle</a></li>
+ <li><a href="table.html">Tabelle</a></li>
  <li>Prospekte</li>
  <li>Civey</li>
+ <li><a href="https://intranet.cxo.name/wiki/display/BUNHT/CHIP+-+Widgets">Doukumentation</a></li>
 </ul>
 
 <h2 id="prospekte">Prospekte</h2>
@@ -82,12 +83,6 @@ td {
 <script>
 
 // Prospekte
-
-
-
-
-
-
 document.getElementById("offeristaButton").addEventListener("click", generateOfferistaWidget);
 
 function generateOfferistaWidget() {
@@ -107,6 +102,7 @@ function generateOfferistaWidget() {
  console.log(`Offerista-Widget mit der ID ${merchantId} und dem Namen ${merchantName} für ${businessUnit} erzeugt.`);
 };
 
+// Civey
 document.getElementById("civeyButton").addEventListener("click", generateCiveyWidget);
 function generateCiveyWidget() {
  let civeyId = document.getElementById("civeyId").value;
