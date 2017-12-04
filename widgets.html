@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Widgetgenerator</title>
+
 <style type="text/css">
 body {
   font-family: sans-serif;
@@ -14,9 +15,12 @@ td {
 }
 
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
 
 </head>
 <body>
+  <div class="container">
 
 <h1>CHIP-Widget-Generator</h1>
 <ul>
@@ -28,15 +32,18 @@ td {
 
 <h2 id="prospekte">Prospekte</h2>
 
- <label>Business Unit</label>
-  <select id="selectBusinessUnit">
+<div class="formgroup">
+ <label for="selectBusinessUnit">Business Unit</label>
+  <select id="selectBusinessUnit" class="form-control">
    <option value="nht">NHT</option>
    <option value="bad">BAD</option>
   </select>
+</div>
 
  <br>
- <label>Händler</label>
-  <select id="selectMerchant">
+ <div class="formgroup">
+ <label for="selectMerchant">Händler</label>
+  <select id="selectMerchant" class="form-control">
    <optgroup label="Top-Händler">
    <option value="14">Media Markt</option>
    <option value="23">Rewe</option>
@@ -63,22 +70,28 @@ td {
 
    </optgroup>
   </select>
-
-  <br>
-  <button id="offeristaButton">Widget erzeugen</button>
-
+</div>
+<br>
+  <button id="offeristaButton" class="btn">Widget erzeugen</button>
 
 
 <h2 id="civey">Civey</h2>
 
-<label>Civey-ID:</label> <input type="text" id="civeyId">
-<button id="civeyButton">Widget erzeugen</button>
+
+<div class="formgroup">
+<label for="civeyId">Civey-ID:</label>
+<input type="text" id="civeyId" class="form-control">
+</div>
+<br>
+<button id="civeyButton" class="btn">Widget erzeugen</button>
 
 
 <br><br><br>
 <label>Widget-Code</label><br>
 <textarea id="output" rows="12" cols="80"></textarea>
 
+
+  </div>
 
 <script>
 
@@ -120,6 +133,7 @@ console.log(`Civey-Widget mit der ID ${civeyId} erzeugt.`);
 };
 
 </script>
+
 
 
 </body>
