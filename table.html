@@ -4,21 +4,34 @@
 <meta charset="utf-8">
 <title>Tabellengenerator</title>
 
-<style>
-body {
-  font-family: sans-serif;
-  font-size: 13px;
-}
-
-td {
-    padding: 4px;
-}
-
+<style type="text/css">
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1em;
+  }
+  h1 {
+    font-size: 1.6em;
+  }
+  h2 {
+    font-size: 1.3em;
+  }
+  .container {
+    width: 80%;
+    margin: auto;
+  }
+  #output {
+    display: none;
+  }
+  #tableMarkup {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px;
+    border: 1px solid #ABACAB;
+  }
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
 </head>
 <body>
+  <div class="container">
 
   <h1>CHIP-Widget-Generator</h1>
   <ul>
@@ -28,7 +41,7 @@ td {
   </ul>
 
 <h2>1. Wie soll die Tabelle aussehen?</h2>
-<table>
+<table class="table table-bordered">
 <tr>
   <th>A</th>
   <th>B</th>
@@ -38,20 +51,20 @@ td {
   <th>F</th>
 </tr>
 <tr>
-  <td><select id="rowA"><option value="a_mobile">Desktop & Mobile</option><option value="a_desktop">Nur Desktop</option><option value="a_inactive">inaktiv</option></td>
-  <td><select id="rowB"><option value="b_mobile">Desktop & Mobile</option><option value="b_desktop">Nur Desktop</option><option value="b_inactive">inaktiv</option></td>
-  <td><select id="rowC"><option value="c_mobile">Desktop & Mobile</option><option value="c_desktop">Nur Desktop</option><option value="c_inactive">inaktiv</option></td>
-  <td><select id="rowD"><option value="d_mobile">Desktop & Mobile</option><option value="d_desktop">Nur Desktop</option><option value="d_inactive">inaktiv</option></td>
-  <td><select id="rowE"><option value="e_mobile">Desktop & Mobile</option><option value="e_desktop">Nur Desktop</option><option value="e_inactive" selected>inaktiv</option></td>
-  <td><select id="rowF"><option value="f_mobile">Desktop & Mobile</option><option value="f_desktop">Nur Desktop</option><option value="f_inactive" selected>inaktiv</option></td>
+  <td><select id="colA"><option value="a_mobile">Desktop & Mobile</option><option value="a_desktop">Nur Desktop</option><option value="a_inactive">inaktiv</option></td>
+  <td><select id="colB"><option value="b_mobile">Desktop & Mobile</option><option value="b_desktop">Nur Desktop</option><option value="b_inactive">inaktiv</option></td>
+  <td><select id="colC"><option value="c_mobile">Desktop & Mobile</option><option value="c_desktop">Nur Desktop</option><option value="c_inactive">inaktiv</option></td>
+  <td><select id="colD"><option value="d_mobile">Desktop & Mobile</option><option value="d_desktop">Nur Desktop</option><option value="d_inactive">inaktiv</option></td>
+  <td><select id="colE"><option value="e_mobile">Desktop & Mobile</option><option value="e_desktop">Nur Desktop</option><option value="e_inactive" selected>inaktiv</option></td>
+  <td><select id="colF"><option value="f_mobile">Desktop & Mobile</option><option value="f_desktop">Nur Desktop</option><option value="f_inactive" selected>inaktiv</option></td>
 </tr>
 <tr>
-  <td><input type="text" id="titleOfRowA" placeholder="Überschrift Spalte A"></td>
-  <td><input type="text" id="titleOfRowB" placeholder="Überschrift Spalte B"></td>
-  <td><input type="text" id="titleOfRowC" placeholder="Überschrift Spalte C"></td>
-  <td><input type="text" id="titleOfRowD" placeholder="Überschrift Spalte D"></td>
-  <td><input type="text" id="titleOfRowE" placeholder="Überschrift Spalte E"></td>
-  <td><input type="text" id="titleOfRowF" placeholder="Überschrift Spalte F"></td>
+  <td><input type="text" id="titleOfColA" placeholder="Überschrift Spalte A"></td>
+  <td><input type="text" id="titleOfColB" placeholder="Überschrift Spalte B"></td>
+  <td><input type="text" id="titleOfColC" placeholder="Überschrift Spalte C"></td>
+  <td><input type="text" id="titleOfColD" placeholder="Überschrift Spalte D"></td>
+  <td><input type="text" id="titleOfColE" placeholder="Überschrift Spalte E"></td>
+  <td><input type="text" id="titleOfColF" placeholder="Überschrift Spalte F"></td>
 </tr>
 
 </table>
@@ -59,7 +72,7 @@ td {
 <h2>2. Wie soll die Tabelle heißen?</h2>
 <input type="text" id="tableHead">
 
-<h2>3. Wie viele Zeilen hat die Tablle?</h2>
+<h2>3. Wie viele Zeilen hat die Tabelle?</h2>
 <select id="numberOfRows">
 <option>1</option>
 <option>2</option>
@@ -77,12 +90,14 @@ td {
 <option>14</option>
 <option>15</option>
 </select>
-<button id="submitRows">Bestätigen</button>
+<button id="submitTable" class="btn">Tabelle generieren</button>
 
-<h2>X. Tabelle kopieren und Inhalte einfügen</h2>
-<textarea cols="60" rows="10" id="output"></textarea>
 
-<div class="hint">
+<div id="output">
+<h2>Tabelle kopieren und Inhalte einfügen</h2>
+<textarea cols="60" rows="10" id="tableMarkup"></textarea>
+
+ <div class="hint">
   <p>Bewertungen:</p>
 
   <ul>
@@ -93,123 +108,125 @@ td {
 
   <p>*Text fetten*</p>
 
-  <p>Zeilenumbruch: \\\\</p>
+  <p>Zeilenumbruch erzwingen: \\\\</p>
 
-  <p>Button: &lt;chip-button&gt;&lt;a href="#" rel="nofollow" target="_blank"&gt;Linktest&lt;/a&gt;&lt;/chip-button&gt;</p>
+  <p>Button: &lt;chip-button&gt;&lt;a href="https://linkziel.de/" rel="nofollow" target="_blank"&gt;Linktext&lt;/a&gt;&lt;/chip-button&gt;</p>
+ </div>
 </div>
 
+ </div> 
 
 
 <script>
 // 1. Spalten auslesen
-document.getElementById("submitRows").addEventListener("click", parseRows);
-function parseRows() {
+document.getElementById("submitTable").addEventListener("click", parseCols);
+function parseCols() {
   // Liest den Typ der Spalten aus
-  let typeOfRowA = document.getElementById("rowA").value;
-  let typeOfRowB = document.getElementById("rowB").value;
-  let typeOfRowC = document.getElementById("rowC").value;
-  let typeOfRowD = document.getElementById("rowD").value;
-  let typeOfRowE = document.getElementById("rowE").value;
-  let typeOfRowF = document.getElementById("rowF").value;
+  let typeOfColA = document.getElementById("colA").value;
+  let typeOfColB = document.getElementById("colB").value;
+  let typeOfColC = document.getElementById("colC").value;
+  let typeOfColD = document.getElementById("colD").value;
+  let typeOfColE = document.getElementById("colE").value;
+  let typeOfColF = document.getElementById("colF").value;
 
   // Liest den Namen der Spalten aus
-  let titleOfRowA = document.getElementById("titleOfRowA").value;
-  let titleOfRowB = document.getElementById("titleOfRowB").value;
-  let titleOfRowC = document.getElementById("titleOfRowC").value;
-  let titleOfRowD = document.getElementById("titleOfRowD").value;
-  let titleOfRowE = document.getElementById("titleOfRowE").value;
-  let titleOfRowF = document.getElementById("titleOfRowF").value;
+  let titleOfColA = document.getElementById("titleOfColA").value;
+  let titleOfColB = document.getElementById("titleOfColB").value;
+  let titleOfColC = document.getElementById("titleOfColC").value;
+  let titleOfColD = document.getElementById("titleOfColD").value;
+  let titleOfColE = document.getElementById("titleOfColE").value;
+  let titleOfColF = document.getElementById("titleOfColF").value;
 
 
   // Bereitet die Ausgabe der Spalten in Abhängigkeit vom gewählten Typ plus Titel vor
   // Speichert außerdem die Zahl der aktiven Spalten
   let numberOfCols = 0;
 
-  let setRowA;
-  if (typeOfRowA == "a_mobile") {
-    setRowA = "|"+titleOfRowA;
+  let setColA;
+  if (typeOfColA == "a_mobile") {
+    setColA = "|"+titleOfColA;
     numberOfCols = 1;
-    console.log("Spalte A: "+setRowA);
-  } else if (typeOfRowA == "a_desktop") {
-    setRowA = "|"+titleOfRowA+"<chip-mobile>no</chip-mobile>";
+    console.log("Spalte A: "+setColA);
+  } else if (typeOfColA == "a_desktop") {
+    setColA = "|"+titleOfColA+"<chip-mobile>no</chip-mobile>";
     numberOfCols = 1;
-    console.log("Spalte A: "+setRowA);
+    console.log("Spalte A: "+setColA);
   } else {
-    setRowA = "";
+    setColA = "";
     console.log("Spalte A ist inaktiv.");
   }
 
-  let setRowB;
-  if (typeOfRowB == "b_mobile") {
-    setRowB = "|"+titleOfRowB;
+  let setColB;
+  if (typeOfColB == "b_mobile") {
+    setColB = "|"+titleOfColB;
     numberOfCols = 2;
-    console.log("Spalte B: "+setRowB);
-  } else if (typeOfRowB == "b_desktop") {
-    setRowB = "|"+titleOfRowB+"<chip-mobile>no</chip-mobile>";
+    console.log("Spalte B: "+setColB);
+  } else if (typeOfColB == "b_desktop") {
+    setColB = "|"+titleOfColB+"<chip-mobile>no</chip-mobile>";
     numberOfCols = 2;
-    console.log("Spalte B: "+setRowB);
+    console.log("Spalte B: "+setColB);
   } else {
-    setRowB = "";
+    setColB = "";
     console.log("Spalte B ist inaktiv.");
   }
 
-  let setRowC;
-  if (typeOfRowC == "c_mobile") {
-    setRowC = "|"+titleOfRowC;
+  let setColC;
+  if (typeOfColC == "c_mobile") {
+    setColC = "|"+titleOfColC;
     numberOfCols = 3;
-    console.log("Spalte C: "+setRowC);
-  } else if (typeOfRowC == "c_desktop") {
-    setRowC = "|"+titleOfRowC+"<chip-mobile>no</chip-mobile>";
+    console.log("Spalte C: "+setColC);
+  } else if (typeOfColC == "c_desktop") {
+    setColC = "|"+titleOfColC+"<chip-mobile>no</chip-mobile>";
     numberOfCols = 3;
-    console.log("Spalte C: "+setRowC);
+    console.log("Spalte C: "+setColC);
   } else {
-    setRowC = "";
+    setColC = "";
     console.log("Spalte C ist inaktiv.");
   }
 
-  let setRowD;
-  if (typeOfRowD == "d_mobile") {
-    setRowD = "|"+titleOfRowD;
+  let setColD;
+  if (typeOfColD == "d_mobile") {
+    setColD = "|"+titleOfColD;
     numberOfCols = 4;
-    console.log("Spalte D: "+setRowD);
-  } else if (typeOfRowD == "d_desktop") {
-    setRowD = "|"+titleOfRowD+"<chip-mobile>no</chip-mobile>";
+    console.log("Spalte D: "+setColD);
+  } else if (typeOfColD == "d_desktop") {
+    setColD = "|"+titleOfColD+"<chip-mobile>no</chip-mobile>";
     numberOfCols = 4;
-    console.log("Spalte D: "+setRowD);
+    console.log("Spalte D: "+setColD);
   } else {
-    setRowD = "";
+    setColD = "";
     console.log("Spalte D ist inaktiv.");
   }
 
-  let setRowE;
-  if (typeOfRowE == "e_mobile") {
-    setRowE = "|"+titleOfRowE;
-    console.log("Spalte E: "+setRowE);
+  let setColE;
+  if (typeOfColE == "e_mobile") {
+    setColE = "|"+titleOfColE;
+    console.log("Spalte E: "+setColE);
     numberOfCols = 5;
-  } else if (typeOfRowE == "e_desktop") {
-    setRowE = "|"+titleOfRowE+"<chip-mobile>no</chip-mobile>";
+  } else if (typeOfColE == "e_desktop") {
+    setColE = "|"+titleOfColE+"<chip-mobile>no</chip-mobile>";
     numberOfCols = 5;
-    console.log("Spalte E: "+setRowE);
+    console.log("Spalte E: "+setColE);
   } else {
-    setRowE = "";
+    setColE = "";
     console.log("Spalte E ist inaktiv.");
   }
 
-  let setRowF;
-  if (typeOfRowF == "f_mobile") {
-    setRowF = "|"+titleOfRowF;
+  let setColF;
+  if (typeOfColF == "f_mobile") {
+    setColF = "|"+titleOfColF;
     numberOfCols = 6;
-    console.log("Spalte F: "+setRowF);
-  } else if (typeOfRowF == "f_desktop") {
-    setRowF = "|"+titleOfRowF+"<chip-mobile>no</chip-mobile>";
+    console.log("Spalte F: "+setColF);
+  } else if (typeOfColF == "f_desktop") {
+    setColF = "|"+titleOfColF+"<chip-mobile>no</chip-mobile>";
     numberOfCols = 6;
-    console.log("Spalte F: "+setRowF);
+    console.log("Spalte F: "+setColF);
   } else {
-    setRowF = "";
+    setColF = "";
     console.log("Spalte F ist inaktiv.");
   }
 
-  console.log(numberOfCols);
+  console.log("Spalten in der Tabelle: "+numberOfCols);
 
   // Liest die Tabellen-Überschfift aus
   let originalTitle;
@@ -248,13 +265,15 @@ function parseRows() {
   console.log(contentRows);
 
   // Erzeugt die eigentliche Ausgabe
-  document.getElementById("output").innerHTML = `<chip-widgets type="table">\n<chip-header>${originalTitle}</chip-header>\n<chip-content>\n|${setRowA}${setRowB}${setRowC}${setRowD}${setRowE}${setRowF}||\n${contentRows}</chip-content>\n</chip-widgets>`;
+  document.getElementById("tableMarkup").innerHTML = `<chip-widgets type="table">\n<chip-header>${originalTitle}</chip-header>\n<chip-content>\n|${setColA}${setColB}${setColC}${setColD}${setColE}${setColF}||\n${contentRows}</chip-content>\n</chip-widgets>`;
+
+  // Macht den Output sichtbar
+  document.getElementById("output").style.display = "block";
 
 /*
 
 ToDos
 
-- "row" und "col" korrekt benutzen (Aua.)
 - bearbeitbare Tabelle aus den gewählten Einstellungen erzeugen
 - Mögichkeit zum Einfügen von Bewertungsbuttons ergänzen
 
