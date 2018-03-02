@@ -38,12 +38,12 @@ td {
   <th>F</th>
 </tr>
 <tr>
-  <td><select id="rowA"><option value="a_mobile">Desktop & Mobile</option><option value="a_desktop">Nur Desktop</option><<option value="a_inactive">inaktiv</option></td>
-  <td><select id="rowB"><option value="b_mobile">Desktop & Mobile</option><option value="b_desktop">Nur Desktop</option><<option value="b_inactive">inaktiv</option></td>
-  <td><select id="rowC"><option value="c_mobile">Desktop & Mobile</option><option value="c_desktop">Nur Desktop</option><<option value="c_inactive">inaktiv</option></td>
-  <td><select id="rowD"><option value="d_mobile">Desktop & Mobile</option><option value="d_desktop">Nur Desktop</option><<option value="d_inactive">inaktiv</option></td>
-  <td><select id="rowE"><option value="e_mobile">Desktop & Mobile</option><option value="e_desktop">Nur Desktop</option><<option value="e_inactive" selected>inaktiv</option></td>
-  <td><select id="rowF"><option value="f_mobile">Desktop & Mobile</option><option value="f_desktop">Nur Desktop</option><<option value="f_inactive" selected>inaktiv</option></td>
+  <td><select id="rowA"><option value="a_mobile">Desktop & Mobile</option><option value="a_desktop">Nur Desktop</option><option value="a_inactive">inaktiv</option></td>
+  <td><select id="rowB"><option value="b_mobile">Desktop & Mobile</option><option value="b_desktop">Nur Desktop</option><option value="b_inactive">inaktiv</option></td>
+  <td><select id="rowC"><option value="c_mobile">Desktop & Mobile</option><option value="c_desktop">Nur Desktop</option><option value="c_inactive">inaktiv</option></td>
+  <td><select id="rowD"><option value="d_mobile">Desktop & Mobile</option><option value="d_desktop">Nur Desktop</option><option value="d_inactive">inaktiv</option></td>
+  <td><select id="rowE"><option value="e_mobile">Desktop & Mobile</option><option value="e_desktop">Nur Desktop</option><option value="e_inactive" selected>inaktiv</option></td>
+  <td><select id="rowF"><option value="f_mobile">Desktop & Mobile</option><option value="f_desktop">Nur Desktop</option><option value="f_inactive" selected>inaktiv</option></td>
 </tr>
 <tr>
   <td><input type="text" id="titleOfRowA" placeholder="Überschrift Spalte A"></td>
@@ -159,7 +159,7 @@ function parseRows() {
     numberOfCols = 3;
     console.log("Spalte C: "+setRowC);
   } else if (typeOfRowC == "c_desktop") {
-    setRowB = "|"+titleOfRowC+"<chip-mobile>no</chip-mobile>";
+    setRowC = "|"+titleOfRowC+"<chip-mobile>no</chip-mobile>";
     numberOfCols = 3;
     console.log("Spalte C: "+setRowC);
   } else {
